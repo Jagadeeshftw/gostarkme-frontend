@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ConnectWallet from "../ui/ConnectWalletButton";
+import PriceBox from "./PriceBox";  
 
 interface NavItem {
     label: string;
@@ -48,8 +49,13 @@ export const Navbar = ({
                     </div>
                 </div>
 
-                {/* Right section: Wallet Button and Mobile Menu */}
+                {/* Right section: Price Box, Wallet Button and Mobile Menu */}
                 <div className="flex items-center space-x-4">
+                    {/* Price Box */}
+                    <div className="hidden md:block">
+                        <PriceBox />
+                    </div>
+
                     {/* Wallet Button (mobile) */}
                     <div className="bottom-4 right-4 md:hidden">
                         <ConnectWallet />
@@ -87,6 +93,10 @@ export const Navbar = ({
             {isMenuOpen && (
                 <div className="md:hidden bg-white border-t border-gray-200">
                     <div className="flex flex-col space-y-2 py-3 px-4">
+                        {/* Price Box in mobile menu */}
+                        <div className="py-2">
+                            <PriceBox />
+                        </div>
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
