@@ -1,15 +1,18 @@
 import { fundAbi } from "@/contracts/abis/fund";
-import { addrFund } from "@/contracts/addresses";
 import { formatNumber } from "@/lib/helper";
 import { useReadContract, useAccount } from "@starknet-react/core";
 
-export function useGetSingleDonatorByAddress() {
-  const { address: userAddress } = useAccount();
+interface Donator {
+  userAddress: `0x${string}` | undefined;
+  fundAddress: `0x${string}` | undefined;
+}
+
+export function useGetSingleDonatorByAddress({ userAddress, fundAddress }: Donator) {
 
   const { data, isLoading, refetch, isFetching, error } = useReadContract({
     abi: fundAbi,
     functionName: "get_single_donator_by_address",
-    address: addrFund,
+    address: fundAddress,
     args: [userAddress ?? ""],
   });
 
